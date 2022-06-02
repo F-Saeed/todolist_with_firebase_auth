@@ -1,20 +1,31 @@
-const taskList = ({ tasks }) => {
-  const handleClick = async (id) => {
-    console.log(id);
-  };
+// Components
+import TaskCard from './TaskCard';
 
+// Firebase
+import { db } from '../firebase/config';
+import { doc, deleteDoc } from 'firebase/firestore';
+
+// Bootstrap
+import Container from 'react-bootstrap/Container';
+
+const handleClick = async (id) => {
+  await deleteDoc(doc(db, 'tasks', id));
+};
+
+const TaskList = ({ tasks }) => {
   return (
-    <div className='task-list'>
-      <ul>
-        {tasks.map((task) => (
-          <li key={task.id} onClick={() => handleClick(task.id)}>
-            {task.title}
-            {task.text}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <Container className='d-grid gap-4' style={{ maxWidth: '600px' }}>
+      {tasks.map((task) => (
+        <TaskCard
+          key={task.id}
+          id={task.id}
+          title={task.title}
+          text={task.text}
+          handleClick={handleClick}
+        />
+      ))}
+    </Container>
   );
 };
 
-export default taskList;
+export default TaskList;

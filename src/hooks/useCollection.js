@@ -1,15 +1,24 @@
 // React
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Firebase
 import { db } from '../firebase/config';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
 
-const useCollection = (col) => {
+const useCollection = (col, _q) => {
   const [documents, setDocuments] = useState(null);
 
+  // set up query
+  const q = useRef(_q).current;
+
   useEffect(() => {
-    const unsub = onSnapshot(collection(db, col), (snapshot) => {
+    let ref = collection(db, col);
+
+    if (q) {
+      ref = query(ref, where(...q));
+    }
+
+    const unsub = onSnapshot(ref, (snapshot) => {
       let results = [];
       snapshot.docs.forEach((doc) => {
         results.push({ id: doc.id, ...doc.data() });
@@ -19,7 +28,7 @@ const useCollection = (col) => {
     });
 
     return () => unsub();
-  }, [col]);
+  }, [col, q]);
 
   return { documents };
 };

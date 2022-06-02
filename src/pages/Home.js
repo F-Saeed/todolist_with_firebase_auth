@@ -1,14 +1,20 @@
+// Components
 import TaskList from '../components/TaskList';
 import TaskForm from '../components/TaskForm';
+
+// Hooks
 import useCollection from '../hooks/useCollection';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Home = () => {
-  const { documents: tasks } = useCollection('tasks');
+  const { user } = useAuthContext();
+
+  const { documents: tasks } = useCollection('tasks', ['uid', '==', user.uid]);
 
   return (
     <div className='App'>
-      {tasks && <TaskList tasks={tasks} />}
       <TaskForm />
+      {tasks && <TaskList tasks={tasks} />}
     </div>
   );
 };
