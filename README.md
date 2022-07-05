@@ -23,6 +23,7 @@ A simple todolist webapp that allows users to register or login to their separat
 ## Technologies used
 
 - React 17
+- Firebase 9
 - JavaScript
 - React Bootstrap
 - HTML
