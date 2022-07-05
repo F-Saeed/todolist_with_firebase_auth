@@ -31,6 +31,7 @@ const TaskForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     setShow(false);
 
     await addDoc(collection(db, 'tasks'), {
@@ -38,10 +39,10 @@ const TaskForm = () => {
       text: textRef.current.value,
       uid: user.uid,
       status: false,
+    }).then(() => {
+      titleRef.current.value = null;
+      textRef.current.value = null;
     });
-
-    titleRef.current.value = null;
-    textRef.current.value = null;
   };
 
   return (

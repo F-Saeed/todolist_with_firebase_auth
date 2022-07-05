@@ -12,7 +12,7 @@ import Stack from 'react-bootstrap/Stack';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
 const TaskCard = ({ id, title, text, status, handleDelete }) => {
-  const changeStatus = async (id) => {
+  const changeStatus = async () => {
     await updateDoc(doc(db, 'tasks', id), { status: !status });
   };
 
@@ -27,7 +27,7 @@ const TaskCard = ({ id, title, text, status, handleDelete }) => {
           variant={status ? 'success' : 'outline-success'}
           checked={status}
           value='1'
-          onChange={() => changeStatus(id)}
+          onClick={changeStatus}
           style={{ width: '130px' }}
         >
           {status ? (
@@ -44,7 +44,8 @@ const TaskCard = ({ id, title, text, status, handleDelete }) => {
         <Stack gap={2} className='col-md-5 mx-auto'>
           <EditForm id={id} />
           <Button
-            variant='shadow-none outline-danger'
+            className='shadow-none'
+            variant='outline-danger'
             onClick={(event) =>
               handleDelete(
                 event.target.parentElement.parentElement.parentElement.id

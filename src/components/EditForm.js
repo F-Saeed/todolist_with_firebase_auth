@@ -17,7 +17,7 @@ const EditForm = ({ id }) => {
   const titleRef = useRef();
   const textRef = useRef();
 
-  const handleShow = (event) => setShow(true);
+  const handleShow = () => setShow(true);
 
   const handleClose = () => {
     setShow(false);
@@ -25,7 +25,7 @@ const EditForm = ({ id }) => {
     textRef.current.value = null;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const updatedFields = {
@@ -33,16 +33,12 @@ const EditForm = ({ id }) => {
       text: textRef.current.value,
     };
 
-    const updateTask = async () => {
-      await updateDoc(doc(db, 'tasks', id), updatedFields);
+    setShow(false);
+
+    await updateDoc(doc(db, 'tasks', id), updatedFields).then(() => {
       titleRef.current.value = null;
       textRef.current.value = null;
-    };
-
-    setShow(false);
-    console.log(id);
-
-    updateTask();
+    });
   };
 
   return (
