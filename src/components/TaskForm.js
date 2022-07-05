@@ -48,7 +48,7 @@ const TaskForm = () => {
     <Container className='text-center' style={{ maxWidth: '1000px' }}>
       <Button
         type='button'
-        className=' shadow-none m-5'
+        className='shadow-none m-5'
         variant='outline-primary'
         onClick={handleShow}
       >
@@ -79,10 +79,19 @@ const TaskForm = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button form='task-form' type='submit' variant='primary'>
+          <Button
+            className='shadow-none'
+            form='task-form'
+            type='submit'
+            variant='primary'
+          >
             Add
           </Button>
-          <Button variant='secondary' onClick={handleClose}>
+          <Button
+            className='shadow-none'
+            variant='secondary'
+            onClick={handleClose}
+          >
             Cancel
           </Button>
         </Modal.Footer>

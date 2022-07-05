@@ -21,7 +21,7 @@ const TaskCard = ({ id, title, text, status, handleDelete }) => {
       <Card.Header>
         <h3 className='text-success mb-2'>{title}</h3>
         <ToggleButton
-          className='mb-1'
+          className='shadow-none mb-1'
           id='toggle-check'
           type='checkbox'
           variant={status ? 'success' : 'outline-success'}
@@ -44,7 +44,7 @@ const TaskCard = ({ id, title, text, status, handleDelete }) => {
         <Stack gap={2} className='col-md-5 mx-auto'>
           <EditForm id={id} />
           <Button
-            variant='outline-danger'
+            variant='shadow-none outline-danger'
             onClick={(event) =>
               handleDelete(
                 event.target.parentElement.parentElement.parentElement.id

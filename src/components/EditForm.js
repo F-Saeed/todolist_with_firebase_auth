@@ -47,7 +47,12 @@ const EditForm = ({ id }) => {
 
   return (
     <>
-      <Button type='button' variant='secondary' onClick={handleShow}>
+      <Button
+        className='shadow-none'
+        type='button'
+        variant='secondary'
+        onClick={handleShow}
+      >
         Edit
       </Button>
       <Container className='text-center' style={{ maxWidth: '1000px' }}>
@@ -76,10 +81,19 @@ const EditForm = ({ id }) => {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <Button form='task-form' type='submit' variant='secondary'>
+            <Button
+              className='shadow-none'
+              form='task-form'
+              type='submit'
+              variant='secondary'
+            >
               Add
             </Button>
-            <Button variant='outline-secondary' onClick={handleClose}>
+            <Button
+              className='shadow-none'
+              variant='outline-secondary'
+              onClick={handleClose}
+            >
               Cancel
             </Button>
           </Modal.Footer>
