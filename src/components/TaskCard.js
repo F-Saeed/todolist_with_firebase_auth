@@ -21,14 +21,12 @@ const TaskCard = ({ id, title, text, status, handleDelete }) => {
       <Card.Header>
         <h3 className='text-success mb-2'>{title}</h3>
         <ToggleButton
-          className='shadow-none mb-1'
-          id='toggle-check'
+          className=' status-button shadow-none mb-1'
           type='checkbox'
           variant={status ? 'success' : 'outline-success'}
           checked={status}
           value='1'
           onClick={changeStatus}
-          style={{ width: '130px' }}
         >
           {status ? (
             <i className='bi bi-check-circle-fill '></i>
