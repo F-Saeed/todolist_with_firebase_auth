@@ -12,9 +12,8 @@ import Stack from 'react-bootstrap/Stack';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
 const TaskCard = ({ id, title, text, status, handleDelete }) => {
-  const changeStatus = async () => {
+  const changeStatus = async () =>
     await updateDoc(doc(db, 'tasks', id), { status: !status });
-  };
 
   return (
     <Card id={id} className='text-center'>
@@ -38,7 +37,7 @@ const TaskCard = ({ id, title, text, status, handleDelete }) => {
       </Card.Header>
 
       <Card.Body>
-        <Card.Text>{text}</Card.Text>
+        <Card.Text className='fs-5'>{text}</Card.Text>
         <Stack gap={2} className='col-md-5 mx-auto'>
           <EditForm id={id} />
           <Button
