@@ -37,6 +37,7 @@ const TaskForm = () => {
       title: titleRef.current.value,
       text: textRef.current.value,
       uid: user.uid,
+      status: false,
     });
 
     titleRef.current.value = null;

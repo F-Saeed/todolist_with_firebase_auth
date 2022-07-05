@@ -8,7 +8,7 @@ import { doc, deleteDoc } from 'firebase/firestore';
 // Bootstrap
 import Container from 'react-bootstrap/Container';
 
-const handleClick = async (id) => {
+const handleDelete = async (id) => {
   await deleteDoc(doc(db, 'tasks', id));
 };
 
@@ -21,7 +21,8 @@ const TaskList = ({ tasks }) => {
           id={task.id}
           title={task.title}
           text={task.text}
-          handleClick={handleClick}
+          status={task.status}
+          handleDelete={handleDelete}
         />
       ))}
     </Container>
