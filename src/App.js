@@ -5,11 +5,11 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 
 // React Router
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Hooks
 import { useAuthContext } from './hooks/useAuthContext';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 function App() {
   const { user, authIsReady } = useAuthContext();
@@ -19,17 +19,21 @@ function App() {
       {authIsReady && (
         <BrowserRouter>
           <Navigation />
-          <Switch>
-            <Route exact path='/'>
-              {user ? <Home /> : <Redirect to='/login' />}
-            </Route>
-            <Route path='/signup'>
-              {!user ? <Signup /> : <Redirect to='/' />}
-            </Route>
-            <Route path='/login'>
-              {!user ? <Login /> : <Redirect to='/' />}
-            </Route>
-          </Switch>
+          <Routes>
+            <Route
+              exact
+              path='/'
+              element={user ? <Home /> : <Navigate to='/login' />}
+            />
+            <Route
+              path='/signup'
+              element={!user ? <Signup /> : <Navigate to='/' />}
+            />
+            <Route
+              path='/login'
+              element={!user ? <Login /> : <Navigate to='/' />}
+            />
+          </Routes>
         </BrowserRouter>
       )}
     </div>
