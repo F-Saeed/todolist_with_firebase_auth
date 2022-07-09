@@ -1,12 +1,17 @@
 // React
 import { useEffect, useRef, useState } from 'react';
 
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { tasksFetched } from '../features/tasks/tasksSlice';
+
 // Firebase
 import { db } from '../firebase/config';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 
 const useCollection = (col, _q) => {
-  const [documents, setDocuments] = useState(null);
+  const dispatch = useDispatch();
+  const tasksState = useSelector((state) => state);
 
   // set up query
   const q = useRef(_q).current;
@@ -19,18 +24,20 @@ const useCollection = (col, _q) => {
     }
 
     const unsub = onSnapshot(ref, (snapshot) => {
-      let results = [];
+      const results = [];
       snapshot.docs.forEach((doc) => {
         results.push({ id: doc.id, ...doc.data() });
       });
 
-      setDocuments(results);
+      dispatch(tasksFetched(results));
     });
 
     return () => unsub();
-  }, [col, q]);
+  }, [col, q, dispatch]);
 
-  return { documents };
+  const tasksReturned = tasksState.tasks.taskList;
+
+  return { tasksReturned };
 };
 
 export default useCollection;

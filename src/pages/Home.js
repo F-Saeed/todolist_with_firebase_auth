@@ -9,7 +9,11 @@ import { useAuthContext } from '../hooks/useAuthContext';
 const Home = () => {
   const { user } = useAuthContext();
 
-  const { documents: tasks } = useCollection('tasks', ['uid', '==', user.uid]);
+  const { tasksReturned: tasks } = useCollection('tasks', [
+    'uid',
+    '==',
+    user.uid,
+  ]);
 
   return (
     <div className='App'>

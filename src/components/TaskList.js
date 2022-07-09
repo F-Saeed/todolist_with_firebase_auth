@@ -8,6 +8,9 @@ import { doc, deleteDoc } from 'firebase/firestore';
 // Bootstrap
 import Container from 'react-bootstrap/Container';
 
+// React Lazy Load
+import LazyLoad from 'react-lazyload';
+
 const handleDelete = async (id) => {
   await deleteDoc(doc(db, 'tasks', id));
 };
