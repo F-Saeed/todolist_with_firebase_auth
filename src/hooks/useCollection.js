@@ -11,7 +11,7 @@ import { collection, onSnapshot, query, where } from 'firebase/firestore';
 
 const useCollection = (col, _q) => {
   const dispatch = useDispatch();
-  const tasksState = useSelector((state) => state);
+  const tasksState = useSelector((state) => state.tasks);
 
   // set up query
   const q = useRef(_q).current;
@@ -35,9 +35,7 @@ const useCollection = (col, _q) => {
     return () => unsub();
   }, [col, q, dispatch]);
 
-  const tasksReturned = tasksState.tasks.taskList;
-
-  return { tasksReturned };
+  return tasksState;
 };
 
 export default useCollection;
