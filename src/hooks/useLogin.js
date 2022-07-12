@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 
 // React Router
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Firebase
 import { auth } from '../firebase/config';
@@ -15,14 +15,14 @@ const useLogin = () => {
   const [error, setError] = useState(null);
   const { dispatch } = useAuthContext();
 
-  const history = useHistory();
+  const naigate = useNavigate();
 
   const login = (email, password) => {
     setError(null);
     signInWithEmailAndPassword(auth, email, password)
       .then((response) => {
         dispatch({ type: 'LOGIN', payload: response.user });
-        history.push('/');
+        naigate('/');
       })
       .catch((error) => {
         setError(error.message);

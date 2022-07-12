@@ -1,5 +1,5 @@
 // React Router
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Hooks
 import { useAuthContext } from './useAuthContext';
@@ -11,13 +11,13 @@ import { signOut } from 'firebase/auth';
 const useLogOut = () => {
   const { dispatch } = useAuthContext();
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const logOut = () => {
     signOut(auth)
       .then(() => {
         dispatch({ type: 'LOGOUT' });
-        history.push('/login');
+        navigate('/login');
       })
       .catch((error) => console.log(error.message));
   };
